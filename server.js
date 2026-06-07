@@ -8,6 +8,7 @@ dotenv.config();
 
 console.log("🚀 Starting app...");
 console.log("PORT:", process.env.PORT);
+console.log("🔥 RAW PORT FROM RAILWAY:", process.env.PORT);
 console.log("FIREBASE_DB:", !!process.env.FIREBASE_DATABASE_URL);
 console.log("MIDTRANS:", !!process.env.MIDTRANS_SERVER_KEY);
 
