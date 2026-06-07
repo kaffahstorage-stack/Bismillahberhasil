@@ -11,7 +11,13 @@ app.use(express.json());
 app.use(cors());
 
 // ================= FIREBASE INIT =================
-const serviceAccount = require("./firebase-key.json");
+let serviceAccount;
+
+try {
+  serviceAccount = JSON.parse(process.env.FIREBASE_KEY_JSON);
+} catch (e) {
+  serviceAccount = require("./firebase-key.json");
+}
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -93,14 +99,17 @@ await db.ref("transactions/" + order_id).set(order);
 // ================= START SERVER =================
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`WiraStore server running on port ${PORT}`);
-});
 app.get("/api/config", (req, res) => {
   res.json({
-    midtrans_client_key: process.env.MIDTRANS_CLIENT_KEY,
+    midtrans_client_key: process.env.MIDTRANS_CLIENT_KEY || "",
   });
 });
+
 app.get("/success", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "success.html"));
+});
+
+// START SERVER PALING BAWAH
+app.listen(PORT, "0.0.0.0", () => {
+  console.log("🚀 WiraStore running on", PORT);
 });
