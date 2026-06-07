@@ -108,19 +108,8 @@ await db.ref("transactions/" + order_id).set(order);
 });
 
 // ================= START SERVER =================
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
-app.get("/api/config", (req, res) => {
-  res.json({
-    midtrans_client_key: process.env.MIDTRANS_CLIENT_KEY || "",
-  });
-});
-
-app.get("/success", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "success.html"));
-});
-
-// START SERVER PALING BAWAH
 app.listen(PORT, "0.0.0.0", () => {
-  console.log("🚀 WiraStore running on", PORT);
+  console.log("🚀 SERVER READY ON PORT:", PORT);
 });
