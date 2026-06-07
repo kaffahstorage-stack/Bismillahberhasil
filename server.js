@@ -108,8 +108,11 @@ await db.ref("transactions/" + order_id).set(order);
 });
 
 // ================= START SERVER =================
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log("🚀 SERVER READY ON PORT:", PORT);
+});
+app.get("/ping", (req, res) => {
+  res.send("OK");
 });
