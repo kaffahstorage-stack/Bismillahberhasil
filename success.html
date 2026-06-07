@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pembayaran Berhasil - WiraStore</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Outfit',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+        radial-gradient(circle at top right,#ff9f43 0%,transparent 30%),
+        radial-gradient(circle at bottom left,#ffe0b2 0%,transparent 30%),
+        #f8fafc;
+    padding:20px;
+}
+
+.card{
+    width:100%;
+    max-width:500px;
+    background:#fff;
+    border-radius:24px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 20px 50px rgba(0,0,0,.08);
+    animation:fadeIn .6s ease;
+}
+
+.success-icon{
+    width:100px;
+    height:100px;
+    margin:0 auto 24px;
+    border-radius:50%;
+    background:#22c55e;
+    color:white;
+    font-size:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    animation:pop .5s ease;
+}
+
+h1{
+    color:#111827;
+    margin-bottom:10px;
+    font-size:32px;
+}
+
+.subtitle{
+    color:#6b7280;
+    margin-bottom:30px;
+    line-height:1.6;
+}
+
+.info-box{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:18px;
+    margin-bottom:14px;
+    text-align:left;
+}
+
+.label{
+    font-size:13px;
+    color:#6b7280;
+    margin-bottom:6px;
+}
+
+.value{
+    font-size:18px;
+    font-weight:700;
+    color:#111827;
+    word-break:break-word;
+}
+
+.total{
+    color:#ff7a18;
+    font-size:24px;
+}
+
+.btn{
+    margin-top:20px;
+    display:inline-block;
+    width:100%;
+    padding:15px;
+    border-radius:14px;
+    background:#ff7a18;
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+@keyframes pop{
+    0%{
+        transform:scale(0);
+    }
+    80%{
+        transform:scale(1.15);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:600px){
+    .card{
+        padding:30px 22px;
+    }
+
+    h1{
+        font-size:26px;
+    }
+
+    .value{
+        font-size:16px;
+    }
+
+    .total{
+        font-size:22px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+    <h1>Pembayaran Berhasil</h1>
+
+    <p class="subtitle">
+        Terima kasih. Pembayaran Anda telah berhasil kami terima.
+    </p>
+
+    <div class="info-box">
+        <div class="label">ID Pesanan</div>
+        <div class="value" id="orderId">-</div>
+    </div>
+
+    <div class="info-box">
+        <div class="label">Total Pembayaran</div>
+        <div class="value total" id="totalPayment">Rp 0</div>
+    </div>
+
+    <a href="wirastore.html" class="btn">
+        Kembali ke Marketplace
+    </a>
+
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+const orderId = params.get("order_id") || "-";
+const total = params.get("total") || "0";
+
+document.getElementById("orderId").textContent = orderId;
+
+document.getElementById("totalPayment").textContent =
+    "Rp " + Number(total).toLocaleString("id-ID");
+</script>
+
+</body>
+</html>
