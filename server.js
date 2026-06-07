@@ -6,6 +6,11 @@ const midtransClient = require("midtrans-client");
 
 dotenv.config();
 
+console.log("🚀 Starting app...");
+console.log("PORT:", process.env.PORT);
+console.log("FIREBASE_DB:", !!process.env.FIREBASE_DATABASE_URL);
+console.log("MIDTRANS:", !!process.env.MIDTRANS_SERVER_KEY);
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -13,10 +18,16 @@ app.use(cors());
 // ================= FIREBASE INIT =================
 let serviceAccount;
 
+if (!process.env.FIREBASE_KEY_JSON) {
+  console.error("❌ FIREBASE_KEY_JSON belum diset!");
+  process.exit(1);
+}
+
 try {
   serviceAccount = JSON.parse(process.env.FIREBASE_KEY_JSON);
-} catch (e) {
-  serviceAccount = require("./firebase-key.json");
+} catch (err) {
+  console.error("❌ FIREBASE_KEY_JSON rusak formatnya");
+  process.exit(1);
 }
 
 admin.initializeApp({
