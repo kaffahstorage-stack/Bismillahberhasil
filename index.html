@@ -1028,7 +1028,7 @@ async function doCheckout(){
   // 2) Request snapToken from backend
   let snapToken = null, mock = false;
   try {
-    const resp = await fetch("/api/create-transaction", {
+    const resp = await fetch("https://bismillahberhasil-production.up.railway.app/api/create-transaction", {
       method:"POST",
       headers:{ "Content-Type":"application/json" },
       body: JSON.stringify({
