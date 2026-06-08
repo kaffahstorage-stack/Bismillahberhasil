@@ -581,6 +581,137 @@
 @media (max-width: 540px){
   .grid{grid-template-columns:repeat(2,1fr);}
 }
+html {
+  scroll-behavior: smooth;
+}
+
+
+.footer {
+  margin-top: 80px;
+  padding: 60px 0 20px;
+  background: linear-gradient(180deg, #0f172a, #0b1220);
+  color: #cbd5e1;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 30px;
+}
+
+.footer-brand p {
+  margin-top: 12px;
+  color: #94a3b8;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.footer .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer .mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #6366f1, #22c55e);
+  color: white;
+}
+
+.footer .name {
+  font-weight: 800;
+  font-size: 18px;
+  color: white;
+}
+
+.footer .name span {
+  color: #22c55e;
+}
+
+.footer-col h4 {
+  color: white;
+  margin-bottom: 14px;
+  font-size: 15px;
+}
+
+.footer-col a {
+  display: block;
+  color: #94a3b8;
+  text-decoration: none;
+  margin-bottom: 8px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.footer-col a:hover {
+  color: white;
+  transform: translateX(4px);
+}
+
+.footer-col p {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #94a3b8;
+}
+
+.socials {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+}
+
+.socials a {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,0.06);
+  color: white;
+  transition: 0.2s;
+}
+
+.socials a:hover {
+  background: #22c55e;
+  transform: translateY(-3px);
+}
+
+.footer-bottom {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.footer-bottom span {
+  color: #ef4444;
+}
+.floating-card {
+  color: white;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 14px 16px;
+  border-radius: 14px;
+}
+.floating-card .lbl {
+  color: #cbd5e1;
+  font-size: 12px;
+}
+
+.floating-card .val {
+  color: white;
+  font-weight: 700;
+}
     </style>
   </head>
   <body>
@@ -597,7 +728,7 @@
           >
         </div>
         <div class="right">
-          <span><i class="fa-brands fa-whatsapp"></i>0812-3456-7890</span>
+          <span><i class="fa-brands fa-whatsapp"></i>0823-3735-4131</span>
           <span><i class="fa-regular fa-clock"></i>Sen–Sab · 09.00–17.00</span>
         </div>
       </div>
@@ -618,12 +749,10 @@
             placeholder="Cari produk: laptop, CCTV, printer, jasa…"
             data-testid="search-input"
           />
-          <kbd>⌘ K</kbd>
+          
         </div>
         <div class="nav-right">
-          <button class="icon-btn" title="Favorit" data-testid="favorite-btn">
-            <i class="fa-regular fa-heart"></i>
-          </button>
+          
           <button
             class="icon-btn"
             id="openCartBtn"
@@ -652,8 +781,7 @@
           </h1>
           <p class="lead">
             PC, Laptop, Printer, CCTV, Sound System, dan Jasa profesional —
-            harga jujur, garansi resmi, pengiriman cepat, pembayaran aman dengan
-            Midtrans.
+            harga murah, garansi resmi, pengiriman cepat.
           </p>
           <div class="hero-cta">
             <button
@@ -725,23 +853,69 @@
       </div>
     </section>
 
-    <footer>
-      <div class="container">
-        <div class="brand">
-          <div class="mark"><i class="fa-solid fa-bolt"></i></div>
-          <div class="name">Wira<span>Store</span> Marketplace</div>
-        </div>
-        <div>© 2026 WiraStore. Dibangun dengan ❤ di Indonesia.</div>
-        <div>
-          <a href="#"><i class="fa-brands fa-instagram"></i></a>
-          &nbsp;<a href="#"><i class="fa-brands fa-tiktok"></i></a> &nbsp;<a
-            href="#"
-            ><i class="fa-brands fa-whatsapp"></i
-          ></a>
-        </div>
-      </div>
-    </footer>
+<footer class="footer">
+  <div class="container footer-grid">
 
+    <!-- Brand -->
+    <div class="footer-brand">
+      <div class="brand">
+        <div class="mark"><i class="fa-solid fa-bolt"></i></div>
+        <div class="name">Wira<span>Store</span></div>
+      </div>
+      <p>
+        Marketplace elektronik & jasa terpercaya di Indonesia.
+        Harga murah, pengiriman cepat, dan pembayaran aman.
+      </p>
+
+      <div class="socials">
+        <a href="https://www.instagram.com/wira.audio/" target="_blank">
+  <i class="fa-brands fa-instagram"></i>
+</a>
+        <a href="https://www.facebook.com/muchtar.azthar/" target="_blank">
+  <i class="fa-brands fa-facebook"></i>
+</a>
+        <a href="https://wa.me/6282337354131" target="_blank">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#products">Produk</a>
+      <a href="#categories">Kategori</a>
+      <a href="#checkout">Checkout</a>
+      <a href="#">Promo</a>
+    </div>
+
+    <!-- Kategori -->
+    <div class="footer-col">
+      <h4>Kategori</h4>
+      <a href="#">Laptop</a>
+      <a href="#">PC Desktop</a>
+      <a href="#">Printer</a>
+      <a href="#">CCTV</a>
+      <a href="#">Sound System</a>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-col">
+      <h4>Kontak</h4>
+      <p><i class="fa-solid fa-location-dot"></i> Indonesia</p>
+      <p><i class="fa-solid fa-envelope"></i> wirastore@gmail.com</p>
+      <p><i class="fa-solid fa-phone"></i> +62 823 3735 4131</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div>© 2026 WiraStore. All rights reserved.</div>
+    <div class="mini">
+      Dibuat dengan <span>❤</span>Banjarbaru
+    </div>
+  </div>
+</footer>
     <!-- Overlay -->
     <div class="overlay" id="overlay" data-testid="overlay"></div>
 
@@ -1765,6 +1939,50 @@
       imageModal.addEventListener("click", () => {
         imageModal.classList.remove("show");
       });
+      const searchInput = document.getElementById("searchInput");
+const productSection = document.getElementById("products");
+
+let typingTimer;
+const debounceDelay = 400;
+
+// ambil semua card produk
+
+
+searchInput.addEventListener("input", () => {
+  clearTimeout(typingTimer);
+
+  typingTimer = setTimeout(() => {
+    const query = searchInput.value.toLowerCase().trim();
+
+    const cards = document.querySelectorAll(".card"); // penting: ambil ulang
+
+    let foundAny = false;
+
+    cards.forEach(card => {
+      const name = card.querySelector(".name")?.textContent.toLowerCase() || "";
+      const desc = card.querySelector(".desc")?.textContent.toLowerCase() || "";
+
+      const match = name.includes(query) || desc.includes(query);
+
+      card.style.display = match ? "flex" : "none";
+
+      if (match) foundAny = true;
+    });
+
+    if (query.length > 0 && foundAny) {
+      const productSection = document.getElementById("products");
+
+      // kasih sedikit delay biar layout sudah update dulu
+      setTimeout(() => {
+        productSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }, 80);
+    }
+
+  }, 300);
+});
     </script>
   </body>
 </html>
