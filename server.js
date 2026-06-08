@@ -7,7 +7,6 @@ const path = require("path");
 
 dotenv.config();
 
-/* ================= APP INIT (WAJIB PALING ATAS) ================= */
 const app = express();
 
 /* ================= LOG ================= */
@@ -15,11 +14,10 @@ console.log("🚀 Starting app...");
 console.log("PORT:", process.env.PORT);
 console.log("FIREBASE:", !!process.env.FIREBASE_KEY_JSON);
 console.log("MIDTRANS:", !!process.env.MIDTRANS_SERVER_KEY);
-console.log("FIREBASE RAW LENGTH:", process.env.FIREBASE_KEY_JSON?.length);
 
 /* ================= MIDDLEWARE ================= */
 app.use((req, res, next) => {
-  console.log("📩 REQUEST:", req.method, req.url);
+  console.log("📩", req.method, req.url);
   next();
 });
 
@@ -33,7 +31,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.options(/.*/, cors(corsOptions));
 
-/* ================= FIREBASE SAFE ================= */
+/* ================= FIREBASE ================= */
 let db = null;
 
 try {
@@ -61,11 +59,7 @@ const snap = new midtransClient.Snap({
 
 /* ================= ROUTES ================= */
 app.get("/ping", (req, res) => {
-  res.status(200).send("OK");
-});
-
-app.get("/", (req, res) => {
-  res.send("Backend running");
+  res.json({ status: "ok", time: Date.now() });
 });
 
 /* ================= START ================= */
