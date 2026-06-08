@@ -1,3 +1,8 @@
+console.log("ENV CHECK:", {
+  FIREBASE_KEY_JSON: !!process.env.FIREBASE_KEY_JSON,
+  FIREBASE_DB: !!process.env.FIREBASE_DATABASE_URL,
+  MIDTRANS: !!process.env.MIDTRANS_SERVER_KEY
+});
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
