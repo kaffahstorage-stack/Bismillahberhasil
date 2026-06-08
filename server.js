@@ -25,8 +25,17 @@ const corsOptions = {
   allowedHeaders: ["Content-Type"],
 };
 
-app.use(cors(corsOptions));
-app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://bismillahberhasil-plum.vercel.app");
+  res.header("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+
+  next();
+});
 
 // ================= FIREBASE INIT =================
 let serviceAccount;
