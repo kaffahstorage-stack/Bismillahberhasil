@@ -49,7 +49,7 @@ try {
     console.log("🔥 Firebase OK");
   }
 } catch (err) {
-  console.log("❌ Firebase error:", err.message);
+  console.error("❌ Firebase ERROR:", err.message);
 }
 
 /* ================= MIDTRANS ================= */
@@ -64,7 +64,7 @@ app.get("/ping", (req, res) => {
 });
 
 /* ================= START ================= */
-const PORT = 2026;
+const PORT = process.env.PORT || 3000;
 
 const server = app.listen(PORT, "0.0.0.0", () => {
   console.log("🚀 SERVER READY ON PORT:", PORT);
