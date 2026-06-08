@@ -65,6 +65,6 @@ app.get("/ping", (req, res) => {
 /* ================= START ================= */
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log("🚀 SERVER READY ON PORT:", PORT);
+app.listen(process.env.PORT, "0.0.0.0", () => {
+  console.log("🚀 SERVER READY ON PORT:", process.env.PORT);
 });
