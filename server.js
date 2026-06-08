@@ -26,7 +26,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // WAJIB untuk preflight
-app.options("*", cors(corsOptions));
+app.options("/*", cors(corsOptions));
 
 
 
