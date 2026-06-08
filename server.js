@@ -3,36 +3,33 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const admin = require("firebase-admin");
 const midtransClient = require("midtrans-client");
+const path = require("path");
 
 dotenv.config();
 
 console.log("🚀 Starting app...");
 console.log("PORT:", process.env.PORT);
-console.log("🔥 RAW PORT FROM RAILWAY:", process.env.PORT);
-console.log("FIREBASE_DB:", !!process.env.FIREBASE_DATABASE_URL);
+console.log("FIREBASE:", !!process.env.FIREBASE_KEY_JSON);
 console.log("MIDTRANS:", !!process.env.MIDTRANS_SERVER_KEY);
-console.log("🔥 NODE ENV PORT RAW:", process.env.PORT);
-console.log("🔥 TYPE OF PORT:", typeof process.env.PORT);
-
 
 const app = express();
-app.use(express.json());
+
+/* ===================== CORS (FIX STABLE) ===================== */
 const corsOptions = {
   origin: "https://bismillahberhasil-plum.vercel.app",
   methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app.use(cors(corsOptions));
 
-// WAJIB untuk preflight
-app.options("/*", cors(corsOptions));
+// handle preflight WITHOUT wildcard crash
+app.options(/.*/, cors(corsOptions));
 
+/* ===================== BODY ===================== */
+app.use(express.json());
 
-
-
-
-// ================= FIREBASE INIT =================
+/* ===================== FIREBASE ===================== */
 let serviceAccount;
 
 if (!process.env.FIREBASE_KEY_JSON) {
@@ -43,7 +40,7 @@ if (!process.env.FIREBASE_KEY_JSON) {
 try {
   serviceAccount = JSON.parse(process.env.FIREBASE_KEY_JSON);
 } catch (err) {
-  console.error("❌ FIREBASE_KEY_JSON rusak formatnya");
+  console.error("❌ FIREBASE_KEY_JSON rusak format");
   process.exit(1);
 }
 
@@ -54,28 +51,32 @@ admin.initializeApp({
 
 const db = admin.database();
 
-// ================= MIDTRANS CONFIG =================
-let snap = new midtransClient.Snap({
+/* ===================== MIDTRANS ===================== */
+const snap = new midtransClient.Snap({
   isProduction: false,
   serverKey: process.env.MIDTRANS_SERVER_KEY,
 });
 
-// ================= ROUTES =================
-
-const path = require("path");
-
-// SERVE FRONTEND
+/* ===================== STATIC FRONTEND ===================== */
 app.use(express.static(path.join(__dirname, "public")));
 
-// homepage
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Create transaction (MIDTRANS)
+/* ===================== HEALTH CHECK ===================== */
+app.get("/ping", (req, res) => {
+  res.status(200).send("OK");
+});
+
+/* ===================== CREATE TRANSACTION ===================== */
 app.post("/api/create-transaction", async (req, res) => {
   try {
     const { order_id, gross_amount, customer, items } = req.body;
+
+    if (!order_id || !gross_amount) {
+      return res.status(400).json({ error: "Invalid request" });
+    }
 
     const order = {
       order_id,
@@ -86,7 +87,7 @@ app.post("/api/create-transaction", async (req, res) => {
       created_at: new Date().toISOString(),
     };
 
-await db.ref("transactions/" + order_id).set(order);
+    await db.ref("transactions/" + order_id).set(order);
 
     const parameter = {
       transaction_details: {
@@ -94,10 +95,10 @@ await db.ref("transactions/" + order_id).set(order);
         gross_amount,
       },
       customer_details: {
-        first_name: customer.name,
-        phone: customer.phone,
+        first_name: customer?.name || "Customer",
+        phone: customer?.phone || "",
         shipping_address: {
-          address: customer.address,
+          address: customer?.address || "",
         },
       },
       item_details: items.map((i) => ({
@@ -110,27 +111,23 @@ await db.ref("transactions/" + order_id).set(order);
 
     const transaction = await snap.createTransaction(parameter);
 
-    res.json({
+    return res.json({
       snap_token: transaction.token,
       redirect_url: transaction.redirect_url,
     });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json({
+    console.error("❌ ERROR:", err);
+    return res.status(500).json({
       error: "Failed to create transaction",
       detail: err.message,
     });
   }
 });
 
-// ================= START SERVER =================
+/* ===================== START SERVER ===================== */
 const PORT = process.env.PORT || 3000;
 
-const server = app.listen(PORT, "0.0.0.0", () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log("🚀 SERVER READY ON PORT:", PORT);
-});
-
-server.on("error", (err) => {
-  console.error("❌ SERVER ERROR:", err);
 });
