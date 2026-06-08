@@ -17,7 +17,16 @@ console.log("🔥 TYPE OF PORT:", typeof process.env.PORT);
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: [
+    "https://bismillahberhasil-plum.vercel.app"
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 // ================= FIREBASE INIT =================
 let serviceAccount;
