@@ -1169,7 +1169,7 @@ $("#shopNowBtn").addEventListener("click", ()=>{
 (async function init(){
   // Try to update Midtrans client key from backend config if real key set
   try {
-    const r = await fetch("/api/config");
+    const r = await fetch("https://bismillahberhasil-production.up.railway.app/api/config");
     if (r.ok){
       const cfg = await r.json();
       if (cfg.midtrans_client_key && cfg.midtrans_client_key !== "ISI_CLIENT_KEY"){
