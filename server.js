@@ -29,6 +29,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(express.static(path.join(__dirname)));
 app.options(/.*/, cors(corsOptions));
 
 /* ================= FIREBASE ================= */
