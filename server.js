@@ -11,6 +11,9 @@ console.log("PORT:", process.env.PORT);
 console.log("🔥 RAW PORT FROM RAILWAY:", process.env.PORT);
 console.log("FIREBASE_DB:", !!process.env.FIREBASE_DATABASE_URL);
 console.log("MIDTRANS:", !!process.env.MIDTRANS_SERVER_KEY);
+console.log("🔥 NODE ENV PORT RAW:", process.env.PORT);
+console.log("🔥 TYPE OF PORT:", typeof process.env.PORT);
+
 
 const app = express();
 app.use(express.json());
@@ -109,11 +112,12 @@ await db.ref("transactions/" + order_id).set(order);
 });
 
 // ================= START SERVER =================
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, "0.0.0.0", () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
   console.log("🚀 SERVER READY ON PORT:", PORT);
 });
-app.get("/ping", (req, res) => {
-  res.send("OK");
+
+server.on("error", (err) => {
+  console.error("❌ SERVER ERROR:", err);
 });
