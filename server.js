@@ -18,24 +18,19 @@ console.log("🔥 TYPE OF PORT:", typeof process.env.PORT);
 const app = express();
 app.use(express.json());
 const corsOptions = {
-  origin: [
-    "https://bismillahberhasil-plum.vercel.app"
-  ],
+  origin: "https://bismillahberhasil-plum.vercel.app",
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type"],
 };
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://bismillahberhasil-plum.vercel.app");
-  res.header("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
+app.use(cors(corsOptions));
 
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
+// WAJIB untuk preflight
+app.options("*", cors(corsOptions));
 
-  next();
-});
+
+
+
 
 // ================= FIREBASE INIT =================
 let serviceAccount;
