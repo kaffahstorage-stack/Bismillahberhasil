@@ -63,6 +63,14 @@ app.get("/ping", (req, res) => {
   res.json({ status: "ok", time: Date.now() });
 });
 
+/* Midtransnya kayaknya */
+app.get("/api/config", (req, res) => {
+  res.json({
+    midtrans_client_key: process.env.MIDTRANS_CLIENT_KEY || "Mid-client-jqDXeIjvf3onvJmu",
+    is_production: false
+  });
+});
+
 /* ================= START ================= */
 const PORT = process.env.PORT;
 
@@ -72,3 +80,34 @@ const server = app.listen(PORT, "0.0.0.0", () => {
 
 server.keepAliveTimeout = 120000;
 server.headersTimeout = 120000;
+
+app.post("/api/create-transaction", async (req, res) => {
+  try {
+    const { order_id, gross_amount, customer, items } = req.body;
+
+    console.log("🔥 CREATE TRANSACTION HIT:", order_id);
+
+    if (!order_id || !gross_amount) {
+      return res.status(400).json({ error: "Invalid payload" });
+    }
+
+    const transaction = await snap.createTransaction({
+      transaction_details: {
+        order_id,
+        gross_amount
+      }
+    });
+
+    return res.json({
+      snap_token: transaction.token,
+      redirect_url: transaction.redirect_url
+    });
+
+  } catch (err) {
+    console.error("❌ Midtrans error:", err.message);
+    return res.status(500).json({
+      error: "Failed",
+      detail: err.message
+    });
+  }
+});
