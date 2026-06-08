@@ -11,6 +11,7 @@ console.log("🚀 Starting app...");
 console.log("PORT:", process.env.PORT);
 console.log("FIREBASE:", !!process.env.FIREBASE_KEY_JSON);
 console.log("MIDTRANS:", !!process.env.MIDTRANS_SERVER_KEY);
+console.log("FIREBASE RAW LENGTH:", process.env.FIREBASE_KEY_JSON?.length);
 
 const app = express();
 
