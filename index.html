@@ -230,8 +230,18 @@
           animation:fadeUp .5s both;
         }
         .card:hover{transform:translateY(-4px);border-color:var(--line-2);box-shadow:var(--shadow)}
-        .card .thumb{aspect-ratio:4/3;background:#0c0e14;overflow:hidden;position:relative}
-        .card .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.card .thumb{
+  background:#fff;
+  overflow:hidden;
+  position:relative;
+  aspect-ratio: 16/10;
+}
+        .card .thumb img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:10px;
+}
         .card:hover .thumb img{transform:scale(1.06)}
         .card .tag{
           position:absolute;top:10px;left:10px;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);
@@ -487,7 +497,7 @@
           position:fixed;
           z-index:9999;
           inset:0;
-          background:rgba(0,0,0,.85);
+          background:rgb(0, 0, 0);
           justify-content:center;
           align-items:center;
           padding:20px;
@@ -712,6 +722,88 @@ html {
   color: white;
   font-weight: 700;
 }
+/* Custom Build Banner */
+.custom-build {
+  margin: 24px auto;
+}
+
+.custom-build-box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.08),
+    rgba(37, 99, 235, 0.03)
+  );
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: 20px;
+  padding: 22px;
+  transition: 0.25s ease;
+}
+
+.custom-build-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.custom-build-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 16px;
+  background: var(--brand);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.custom-build-content {
+  flex: 1;
+}
+
+.custom-build-content h3 {
+  margin: 0 0 6px;
+  font-size: 22px;
+}
+
+.custom-build-content p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.custom-build-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  background: #25d366;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.custom-build-btn:hover {
+  transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+  .custom-build-box {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .custom-build-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
     </style>
   </head>
   <body>
@@ -831,6 +923,32 @@ html {
       </div>
     </section>
 
+<!-- Custom Rakitan -->
+<section class="custom-build container">
+  <div class="custom-build-box">
+    <div class="custom-build-icon">
+      <i class="fa-solid fa-screwdriver-wrench"></i>
+    </div>
+
+    <div class="custom-build-content">
+      <h3>Ingin Merakit Sesuatu?</h3>
+      <p>
+        Butuh PC Gaming, PC Kantor, Sound System, atau perangkat lainnya
+        sesuai kebutuhan? Hubungi kami dan konsultasikan kebutuhan Anda.
+      </p>
+    </div>
+
+    <a
+      href="https://wa.me/6282337354131"
+      target="_blank"
+      class="custom-build-btn"
+    >
+      <i class="fa-brands fa-whatsapp"></i>
+      Hubungi Kami
+    </a>
+  </div>
+</section>
+
     <!-- Categories -->
     <section class="cats container">
       <div class="cats-head">
@@ -877,33 +995,21 @@ html {
         <a href="https://wa.me/6282337354131" target="_blank">
   <i class="fa-brands fa-whatsapp"></i>
 </a>
+<a href="https://wira.audiomasjidindonesia.web.id/" target="_blank">
+  <i class="fa-solid fa-globe"></i>
+</a>
       </div>
     </div>
 
-    <!-- Quick Links -->
-    <div class="footer-col">
-      <h4>Quick Links</h4>
-      <a href="#products">Produk</a>
-      <a href="#categories">Kategori</a>
-      <a href="#checkout">Checkout</a>
-      <a href="#">Promo</a>
-    </div>
 
-    <!-- Kategori -->
-    <div class="footer-col">
-      <h4>Kategori</h4>
-      <a href="#">Laptop</a>
-      <a href="#">PC Desktop</a>
-      <a href="#">Printer</a>
-      <a href="#">CCTV</a>
-      <a href="#">Sound System</a>
-    </div>
+
+    
 
     <!-- Contact -->
     <div class="footer-col">
       <h4>Kontak</h4>
       <p><i class="fa-solid fa-location-dot"></i> Indonesia</p>
-      <p><i class="fa-solid fa-envelope"></i> wirastore@gmail.com</p>
+      <p><i class="fa-solid fa-envelope"></i> wiranet.bjb@gmail.com</p>
       <p><i class="fa-solid fa-phone"></i> +62 823 3735 4131</p>
     </div>
 
@@ -1176,22 +1282,20 @@ html {
       const PRODUCTS = [
         // PC Desktop
         {
-          id: "pc-01",
-          kategori: "PC Desktop",
-          nama: "WiraRig Ryzen 7 RTX 4060",
-          harga: 18990000,
-          gambar:
-            "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=900&q=80",
-          deskripsi:
-            "PC rakitan high-performance dengan Ryzen 7, RTX 4060, RAM 32GB DDR5, SSD NVMe 1TB. Cocok untuk gaming dan kreator.",
-        },
+  id: "pc-01",
+  kategori: "PC Desktop",
+  nama: "WiraRig Ryzen 7 RTX 4060",
+  harga: 18990000,
+  gambar: "images/products/pc-01.png",
+  deskripsi:
+    "PC rakitan high-performance dengan Ryzen 7, RTX 4060, RAM 32GB DDR5, SSD NVMe 1TB. Cocok untuk gaming dan kreator.",
+},
         {
           id: "pc-02",
           kategori: "PC Desktop",
           nama: "OfficePro i5 SSD 512GB",
           harga: 7990000,
-          gambar:
-            "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/pc-02.png",
           deskripsi:
             "PC kantor Intel Core i5, RAM 16GB, SSD 512GB. Ringkas, hemat daya, dan tahan banting.",
         },
@@ -1200,8 +1304,7 @@ html {
           kategori: "PC Desktop",
           nama: "Creator Studio i7 + RTX 4070",
           harga: 24990000,
-          gambar:
-            "https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/pc-03.png",
           deskripsi:
             "Workstation kreator i7-14700, RTX 4070, RAM 64GB, SSD 2TB — render 3D dan video editing lancar.",
         },
@@ -1210,10 +1313,9 @@ html {
         {
           id: "lp-01",
           kategori: "Laptop",
-          nama: 'WiraBook Air 14" Ryzen 5',
-          harga: 9990000,
-          gambar:
-            "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=80",
+          nama: 'Asus Vivobook 14',
+          harga: 9000000,
+          gambar: "images/products/lp-01.png",
           deskripsi:
             'Laptop tipis 1.2kg, Ryzen 5, RAM 16GB, SSD 512GB, layar IPS 14" — ideal untuk produktivitas harian.',
         },
@@ -1222,8 +1324,7 @@ html {
           kategori: "Laptop",
           nama: 'WiraBook Pro 16" i9 RTX',
           harga: 29990000,
-          gambar:
-            "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/lp-02.png",
           deskripsi:
             'Laptop kreator 16" 165Hz, Intel i9, RTX 4070, RAM 32GB, SSD 1TB. Performa workstation di tas Anda.',
         },
@@ -1232,8 +1333,7 @@ html {
           kategori: "Laptop",
           nama: 'WiraBook Edu 13" Celeron',
           harga: 4490000,
-          gambar:
-            "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/lp-03.png",
           deskripsi:
             "Laptop pelajar ringan, baterai 10 jam, ideal untuk belajar online dan tugas.",
         },
@@ -1244,8 +1344,7 @@ html {
           kategori: "Printer",
           nama: "InkTank Pro X-720 Wi‑Fi",
           harga: 2790000,
-          gambar:
-            "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/pr-01.png",
           deskripsi:
             "Printer ink-tank irit tinta, Wi‑Fi & cetak dari smartphone. Cocok rumah dan kantor kecil.",
         },
@@ -1254,8 +1353,7 @@ html {
           kategori: "Printer",
           nama: "LaserJet M-201 Mono",
           harga: 3590000,
-          gambar:
-            "https://images.unsplash.com/photo-1581090700227-1e8e3f1f7d3a?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/pr-02.png",  
           deskripsi:
             "Printer laser monokrom cepat 30 ppm. Dokumen kantor tajam dan tahan lama.",
         },
@@ -1264,8 +1362,7 @@ html {
           kategori: "Printer",
           nama: "Photo Studio 6-Color A3+",
           harga: 8990000,
-          gambar:
-            "https://images.unsplash.com/photo-1546961342-1c2641ed5a3f?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/pr-03.png",
           deskripsi:
             "Printer foto 6 warna ukuran A3+ untuk fotografer dan studio cetak.",
         },
@@ -1276,8 +1373,7 @@ html {
           kategori: "CCTV",
           nama: "WiraCam 4-Channel 2MP Kit",
           harga: 2590000,
-          gambar:
-            "https://images.unsplash.com/photo-1557180295-76eee20ae8aa?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/cc-01.png",
           deskripsi:
             "Paket CCTV 4 kamera 2MP, DVR + HDD 1TB, pemantauan via smartphone.",
         },
@@ -1286,8 +1382,7 @@ html {
           kategori: "CCTV",
           nama: "WiraCam Pro 8CH 4MP IP",
           harga: 5490000,
-          gambar:
-            "https://images.unsplash.com/photo-1610903083233-21fa1f7f8b21?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/cc-02.png",
           deskripsi:
             "Paket 8 kamera IP 4MP dengan NVR, audio dua arah, dan night vision.",
         },
@@ -1296,8 +1391,7 @@ html {
           kategori: "CCTV",
           nama: "WiraCam Mini Indoor 360°",
           harga: 649000,
-          gambar:
-            "https://images.unsplash.com/photo-1567721913486-6585f069b332?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/cc-03.png",
           deskripsi:
             "Kamera mungil 360° Wi‑Fi untuk indoor, deteksi gerakan & suara.",
         },
@@ -1308,8 +1402,7 @@ html {
           kategori: "Sound System",
           nama: "WiraSound Pro 600W PA",
           harga: 5490000,
-          gambar:
-            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/ss-01.png",
           deskripsi:
             "Speaker PA aktif 600W, Bluetooth, USB, ideal acara hingga 200 orang.",
         },
@@ -1318,8 +1411,7 @@ html {
           kategori: "Sound System",
           nama: 'Studio Monitor 5" Pair',
           harga: 3290000,
-          gambar:
-            "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/ss-02.png",
           deskripsi:
             'Sepasang monitor studio 5" — referensi jujur untuk produksi musik.',
         },
@@ -1328,8 +1420,7 @@ html {
           kategori: "Sound System",
           nama: "Karaoke Set 200W + 2 Mic",
           harga: 1990000,
-          gambar:
-            "https://images.unsplash.com/photo-1453738773917-9c3eff1db985?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/ss-03.png",
           deskripsi:
             "Paket karaoke rumah dengan amplifier 200W dan 2 mic wireless.",
         },
@@ -1340,8 +1431,7 @@ html {
           kategori: "Jasa",
           nama: "Jasa Instalasi CCTV (per titik)",
           harga: 250000,
-          gambar:
-            "https://images.unsplash.com/photo-1581090700227-4c4f50b1f3b5?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/js-01.png",
           deskripsi:
             "Pemasangan, konfigurasi, dan rapikan kabel CCTV. Tim teknisi bersertifikat.",
         },
@@ -1350,8 +1440,7 @@ html {
           kategori: "Jasa",
           nama: "Service Laptop / PC",
           harga: 150000,
-          gambar:
-            "https://images.unsplash.com/photo-1611078489935-0cb964de46d6?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/js-02.png",
           deskripsi:
             "Diagnosa, install ulang, upgrade SSD/RAM. Hasil terjamin & cepat.",
         },
@@ -1360,8 +1449,7 @@ html {
           kategori: "Jasa",
           nama: "Setup Sound System Event",
           harga: 1500000,
-          gambar:
-            "https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?auto=format&fit=crop&w=900&q=80",
+          gambar: "images/products/js-03.png",
           deskripsi: "Persiapan dan tuning sound untuk event sampai 300 orang.",
         },
       ];
@@ -1374,6 +1462,7 @@ html {
         { key: "CCTV", label: "CCTV", icon: "fa-video" },
         { key: "Sound System", label: "Sound System", icon: "fa-volume-high" },
         { key: "Jasa", label: "Jasa", icon: "fa-screwdriver-wrench" },
+        { key: "storage", label: "Storage", icon: "fa-hard-drive" },
       ];
 
       /* ---------- State ---------- */
@@ -1682,17 +1771,18 @@ html {
             harga: i.harga,
             quantity: i.quantity,
           })),
+          
           total: cartTotal(),
           status: "pending",
           timestamp: new Date().toISOString(),
         };
-
+        
+        localStorage.setItem(
+  "pending_order",
+  JSON.stringify(order)
+);
         // 1) Save to Firestore (or local fallback when placeholder)
-        try {
-          await saveOrderToFirestore(order);
-        } catch (e) {
-          console.warn("Firestore save failed:", e);
-        }
+        
 
         // 2) Request snapToken from backend
         let snapToken = null,
@@ -1811,10 +1901,15 @@ html {
         );
         if (!t) return;
         if (t.dataset.cat) {
-          state.cat = t.dataset.cat;
-          renderCategories();
-          renderProducts();
-        }
+  state.cat = t.dataset.cat;
+
+  // 🔥 RESET SEARCH BOX
+  state.query = "";
+  searchInput.value = "";
+
+  renderCategories();
+  renderProducts();
+}
         if (t.dataset.add) {
           e.stopPropagation();
           addToCart(t.dataset.add, 1);
