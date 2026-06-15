@@ -293,7 +293,7 @@
           display:grid;grid-template-columns:1.05fr 1fr;
         }
         .modal.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
-        .modal .mimg{background:#0a0c11;min-height:260px}
+        .modal .mimg{background:#fff;min-height:260px}
         .modal .mimg img{width:100%;height:100%;object-fit:cover}
         .modal .mbody{padding:28px 28px 26px;display:flex;flex-direction:column;gap:14px;overflow:auto}
         .modal .close{
@@ -803,10 +803,228 @@ html {
     justify-content: center;
   }
 }
+.mimg{
+  position:relative;
+}
 
+.img-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:38px;
+  height:38px;
+  border:none;
+  border-radius:50%;
+  background:rgba(0,0,0,.45);
+  color:#fff;
+  cursor:pointer;
+  z-index:5;
+}
+
+#prevImg{
+  left:10px;
+}
+
+#nextImg{
+  right:10px;
+}
+
+.img-nav:hover{
+  background:rgba(0,0,0,.7);
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+  margin:40px 0;
+}
+
+
+
+.stats{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:28px;
+  margin:40px 0;
+}
+
+.stat-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  position:relative;
+}
+
+.stat-item:not(:last-child)::after{
+  content:"|";
+  color:#d1d5db;
+  margin-left:18px;
+  font-size:22px;
+  font-weight:300;
+}
+
+.stat-item .num{
+  font-size:36px;
+  font-weight:800;
+  color:var(--brand);
+  line-height:1;
+}
+
+.stat-item .text{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:18px;
+  font-weight:500;
+  color:var(--ink);
+}
+
+@media (max-width:768px){
+  .stats{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:16px;
+  }
+
+  .stat-item:not(:last-child)::after{
+    display:none;
+  }
+
+  .stat-item .num{
+    font-size:28px;
+  }
+
+  .stat-item .text{
+    font-size:16px;
+  }
+}
+.agreement{
+  margin:16px 0;
+  padding:14px;
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+}
+
+.agreement label{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  cursor:pointer;
+  line-height:1.6;
+  font-size:14px;
+}
+
+.agreement input{
+  margin-top:3px;
+  transform:scale(1.2);
+}
+/* ===== Halaman Informasi ===== */
+
+.privacy-policy,
+.terms-policy,
+.shipping-policy{
+  margin:40px auto;
+  padding:24px;
+  background:#ffffff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+}
+
+.privacy-policy h2,
+.terms-policy h2,
+.shipping-policy h2{
+  margin-top:0;
+  margin-bottom:16px;
+  font-size:26px;
+}
+
+.privacy-policy p,
+.shipping-policy p{
+  color:#555;
+  line-height:1.8;
+}
+
+.terms-policy ul{
+  padding-left:20px;
+}
+
+.terms-policy li{
+  margin-bottom:10px;
+  color:#555;
+  line-height:1.7;
+}
+.footer-links{
+  margin-top:15px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  align-items:center;
+}
+
+.footer-links a{
+  color:#cbd5e1;
+  text-decoration:none;
+}
+
+.footer-links a:hover{
+  color:#ffffff;
+}
+
+.legal-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  padding:20px;
+}
+
+.legal-modal.show{
+  display:flex;
+}
+
+.legal-box{
+  background:#fff;
+  width:min(700px,95%);
+  max-height:80vh;
+  overflow:auto;
+  border-radius:16px;
+  padding:24px;
+  position:relative;
+}
+
+.legal-box h2{
+  margin-top:0;
+}
+
+.legal-close{
+  position:absolute;
+  top:15px;
+  right:15px;
+  border:none;
+  background:none;
+  font-size:22px;
+  cursor:pointer;
+}
     </style>
   </head>
+  <div class="legal-modal" id="legalModal">
+  <div class="legal-box">
+    <button class="legal-close" id="legalClose">✕</button>
+
+    <h2 id="legalTitle"></h2>
+
+    <div id="legalContent"></div>
+  </div>
+</div>
   <body>
+    
     <!-- Top bar -->
     <div class="topbar">
       <div class="container">
@@ -886,38 +1104,44 @@ html {
             <a class="btn btn-ghost" href="#products"
               ><i class="fa-regular fa-circle-play"></i> Lihat Katalog</a
             >
-          </div>
+          </div>         
+        
           <div class="stats">
-            <div class="stat">
-              <div class="n">12K+</div>
-              <div class="l">Pelanggan</div>
-            </div>
-            <div class="stat">
-              <div class="n">350+</div>
-              <div class="l">Produk Pilihan</div>
-            </div>
-            <div class="stat">
-              <div class="n">4.9★</div>
-              <div class="l">Rating Toko</div>
-            </div>
-          </div>
-        </div>
-        <div class="hero-visual" aria-hidden="true">
-          <img
-            src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?auto=format&fit=crop&w=1200&q=80"
-            alt=""
-          />
-          <div class="floating-card">
-            <div>
-              <div class="lbl">Diskon Bundle</div>
-              <div class="val">PC + Printer Hemat 12%</div>
-            </div>
-            <div
-              class="btn btn-primary"
-              style="padding: 10px 14px; font-size: 13px"
-            >
-              <i class="fa-solid fa-tag"></i> Promo
-            </div>
+  <div class="stat-item">
+    <span class="num">2.500+</span>
+    <span class="text">
+      <i class="fa-solid fa-users"></i>
+      Pelanggan
+    </span>
+  </div>
+
+  <div class="stat-item">
+    <span class="num">8.000+</span>
+    <span class="text">
+      <i class="fa-solid fa-box"></i>
+      Produk Terjual
+    </span>
+  </div>
+
+  <div class="stat-item">
+    <span class="num">4.9★</span>
+    <span class="text">
+      <i class="fa-solid fa-star"></i>
+      Rating
+    </span>
+  </div>
+
+  <div class="stat-item">
+    <span class="num">9+</span>
+    <span class="text">
+      <i class="fa-solid fa-trophy"></i>
+      Tahun Pengalaman
+    </span>
+  </div>
+</div>
+
+
+            
           </div>
         </div>
       </div>
@@ -971,6 +1195,8 @@ html {
       </div>
     </section>
 
+
+
 <footer class="footer">
   <div class="container footer-grid">
 
@@ -1021,6 +1247,21 @@ html {
       Dibuat dengan <span>❤</span>Banjarbaru
     </div>
   </div>
+
+  <div class="footer-links">
+  <a href="https://wira.audiomasjidindonesia.web.id/" target="_blank">
+  Tentang Kami
+</a>
+  <span>|</span>
+
+<a href="javascript:void(0)" id="privacyBtn">Kebijakan Privasi</a>
+<span>|</span>
+
+<a href="javascript:void(0)" id="termsBtn">Syarat & Ketentuan</a>
+<span>|</span>
+
+<a href="javascript:void(0)" id="faqBtn">FAQ</a>
+  </div>
 </footer>
     <!-- Overlay -->
     <div class="overlay" id="overlay" data-testid="overlay"></div>
@@ -1041,7 +1282,15 @@ html {
       >
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <div class="mimg"><img id="mImg" src="" alt="" /></div>
+      <div class="mimg">
+
+  <button id="prevImg" class="img-nav">❮</button>
+
+  <img id="mImg" src="" alt="" />
+
+  <button id="nextImg" class="img-nav">❯</button>
+
+</div>
       <div class="mbody">
         <span class="mtag" id="mTag"></span>
         <div class="mname" id="mName"></div>
@@ -1189,6 +1438,15 @@ html {
           </div>
         </div>
       </div>
+      <div class="agreement">
+  <label>
+    <input type="checkbox" id="agreeTerms">
+    <span>
+      Saya telah membaca petunjuk pembayaran dan memastikan
+      data yang saya masukkan sudah benar.
+    </span>
+  </label>
+</div>
       <div class="actions">
         <button
           class="btn btn-ghost"
@@ -1211,6 +1469,8 @@ html {
     <div class="toasts" id="toasts" data-testid="toasts"></div>
 
     <script>
+      let modalImages = [];
+let currentImageIndex = 0;
       /* ===========================================================
    WiraStore Marketplace — Single File App
    - Product data
@@ -1281,21 +1541,35 @@ html {
       /* ---------- Product Data ---------- */
       const PRODUCTS = [
         // PC Desktop
-        {
+       {
   id: "pc-01",
   kategori: "PC Desktop",
   nama: "WiraRig Ryzen 7 RTX 4060",
   harga: 18990000,
+  stok: 5,
+
   gambar: "images/products/pc-01.png",
+
+  gambarList: [
+    "images/products/pc-01.png",
+    "images/products/pc-01-2.png",
+    "images/products/pc-01-3.png"
+  ],
+
   deskripsi:
     "PC rakitan high-performance dengan Ryzen 7, RTX 4060, RAM 32GB DDR5, SSD NVMe 1TB. Cocok untuk gaming dan kreator.",
-},
+        },
         {
           id: "pc-02",
           kategori: "PC Desktop",
           nama: "OfficePro i5 SSD 512GB",
           harga: 7990000,
+          stok: 10,
           gambar: "images/products/pc-02.png",
+          gambarList: [
+            "images/products/pc-02.png",
+            "images/products/pc-02-2.png"
+          ],
           deskripsi:
             "PC kantor Intel Core i5, RAM 16GB, SSD 512GB. Ringkas, hemat daya, dan tahan banting.",
         },
@@ -1304,7 +1578,12 @@ html {
           kategori: "PC Desktop",
           nama: "Creator Studio i7 + RTX 4070",
           harga: 24990000,
+          stok: 3,
           gambar: "images/products/pc-03.png",
+          gambarList: [
+            "images/products/pc-03.png",
+            "images/products/pc-03-2.png"
+          ],
           deskripsi:
             "Workstation kreator i7-14700, RTX 4070, RAM 64GB, SSD 2TB — render 3D dan video editing lancar.",
         },
@@ -1315,7 +1594,12 @@ html {
           kategori: "Laptop",
           nama: 'Asus Vivobook 14',
           harga: 9000000,
+          stok: 7,
           gambar: "images/products/lp-01.png",
+          gambarList: [
+            "images/products/lp-01.png",
+            "images/products/lp-01-2.png"
+          ],
           deskripsi:
             'Laptop tipis 1.2kg, Ryzen 5, RAM 16GB, SSD 512GB, layar IPS 14" — ideal untuk produktivitas harian.',
         },
@@ -1324,7 +1608,12 @@ html {
           kategori: "Laptop",
           nama: 'WiraBook Pro 16" i9 RTX',
           harga: 29990000,
+          stok: 4,
           gambar: "images/products/lp-02.png",
+          gambarList: [
+            "images/products/lp-02.png",
+            "images/products/lp-02-2.png"
+          ],
           deskripsi:
             'Laptop kreator 16" 165Hz, Intel i9, RTX 4070, RAM 32GB, SSD 1TB. Performa workstation di tas Anda.',
         },
@@ -1333,7 +1622,12 @@ html {
           kategori: "Laptop",
           nama: 'WiraBook Edu 13" Celeron',
           harga: 4490000,
+          stok: 15,
           gambar: "images/products/lp-03.png",
+          gambarList: [
+            "images/products/lp-03.png",
+            "images/products/lp-03-2.png"
+          ],
           deskripsi:
             "Laptop pelajar ringan, baterai 10 jam, ideal untuk belajar online dan tugas.",
         },
@@ -1344,7 +1638,12 @@ html {
           kategori: "Printer",
           nama: "InkTank Pro X-720 Wi‑Fi",
           harga: 2790000,
+          stok: 8,
           gambar: "images/products/pr-01.png",
+          gambarList: [
+            "images/products/pr-01.png",
+            "images/products/pr-01-2.png"
+          ],
           deskripsi:
             "Printer ink-tank irit tinta, Wi‑Fi & cetak dari smartphone. Cocok rumah dan kantor kecil.",
         },
@@ -1353,7 +1652,12 @@ html {
           kategori: "Printer",
           nama: "LaserJet M-201 Mono",
           harga: 3590000,
-          gambar: "images/products/pr-02.png",  
+          stok: 6,
+          gambar: "images/products/pr-02.png",
+          gambarList: [
+            "images/products/pr-02.png",
+            "images/products/pr-02-2.png"
+          ],
           deskripsi:
             "Printer laser monokrom cepat 30 ppm. Dokumen kantor tajam dan tahan lama.",
         },
@@ -1362,7 +1666,12 @@ html {
           kategori: "Printer",
           nama: "Photo Studio 6-Color A3+",
           harga: 8990000,
+          stok: 2,
           gambar: "images/products/pr-03.png",
+          gambarList: [
+            "images/products/pr-03.png",
+            "images/products/pr-03-2.png"
+          ],
           deskripsi:
             "Printer foto 6 warna ukuran A3+ untuk fotografer dan studio cetak.",
         },
@@ -1373,7 +1682,12 @@ html {
           kategori: "CCTV",
           nama: "WiraCam 4-Channel 2MP Kit",
           harga: 2590000,
+          stok: 5,
           gambar: "images/products/cc-01.png",
+          gambarList: [
+            "images/products/cc-01.png",
+            "images/products/cc-01-2.png"
+          ],
           deskripsi:
             "Paket CCTV 4 kamera 2MP, DVR + HDD 1TB, pemantauan via smartphone.",
         },
@@ -1382,7 +1696,12 @@ html {
           kategori: "CCTV",
           nama: "WiraCam Pro 8CH 4MP IP",
           harga: 5490000,
+          stok: 3,
           gambar: "images/products/cc-02.png",
+          gambarList: [
+            "images/products/cc-02.png",
+            "images/products/cc-02-2.png"
+          ],
           deskripsi:
             "Paket 8 kamera IP 4MP dengan NVR, audio dua arah, dan night vision.",
         },
@@ -1391,7 +1710,12 @@ html {
           kategori: "CCTV",
           nama: "WiraCam Mini Indoor 360°",
           harga: 649000,
+          stok: 12,
           gambar: "images/products/cc-03.png",
+          gambarList: [
+            "images/products/cc-03.png",
+            "images/products/cc-03-2.png"
+          ],
           deskripsi:
             "Kamera mungil 360° Wi‑Fi untuk indoor, deteksi gerakan & suara.",
         },
@@ -1402,7 +1726,12 @@ html {
           kategori: "Sound System",
           nama: "WiraSound Pro 600W PA",
           harga: 5490000,
+          stok: 5,
           gambar: "images/products/ss-01.png",
+          gambarList: [
+            "images/products/ss-01.png",
+            "images/products/ss-01-2.png"
+          ],
           deskripsi:
             "Speaker PA aktif 600W, Bluetooth, USB, ideal acara hingga 200 orang.",
         },
@@ -1411,7 +1740,12 @@ html {
           kategori: "Sound System",
           nama: 'Studio Monitor 5" Pair',
           harga: 3290000,
+          stok: 8,
           gambar: "images/products/ss-02.png",
+          gambarList: [
+            "images/products/ss-02.png",
+            "images/products/ss-02-2.png"
+          ],
           deskripsi:
             'Sepasang monitor studio 5" — referensi jujur untuk produksi musik.',
         },
@@ -1420,7 +1754,12 @@ html {
           kategori: "Sound System",
           nama: "Karaoke Set 200W + 2 Mic",
           harga: 1990000,
+          stok: 10,
           gambar: "images/products/ss-03.png",
+          gambarList: [
+            "images/products/ss-03.png",
+            "images/products/ss-03-2.png"
+          ],
           deskripsi:
             "Paket karaoke rumah dengan amplifier 200W dan 2 mic wireless.",
         },
@@ -1431,7 +1770,12 @@ html {
           kategori: "Jasa",
           nama: "Jasa Instalasi CCTV (per titik)",
           harga: 250000,
+          stok: 5,
           gambar: "images/products/js-01.png",
+          gambarList: [
+            "images/products/js-01.png",
+            "images/products/js-01-2.png"
+          ],
           deskripsi:
             "Pemasangan, konfigurasi, dan rapikan kabel CCTV. Tim teknisi bersertifikat.",
         },
@@ -1440,7 +1784,12 @@ html {
           kategori: "Jasa",
           nama: "Service Laptop / PC",
           harga: 150000,
+          stok: 10,
           gambar: "images/products/js-02.png",
+          gambarList: [
+            "images/products/js-02.png",
+            "images/products/js-02-2.png"
+          ],
           deskripsi:
             "Diagnosa, install ulang, upgrade SSD/RAM. Hasil terjamin & cepat.",
         },
@@ -1449,7 +1798,12 @@ html {
           kategori: "Jasa",
           nama: "Setup Sound System Event",
           harga: 1500000,
+          stok: 5,
           gambar: "images/products/js-03.png",
+          gambarList: [
+            "images/products/js-03.png",
+            "images/products/js-03-2.png"
+          ],
           deskripsi: "Persiapan dan tuning sound untuk event sampai 300 orang.",
         },
       ];
@@ -1561,6 +1915,13 @@ html {
       <div class="body">
         <div class="name" data-open="${p.id}">${p.nama}</div>
         <div class="desc">${p.deskripsi}</div>
+        <div class="stock">
+  ${
+    p.stok > 0
+      ? `🟢 Stok: ${p.stok}`
+      : `🔴 Stok Habis`
+  }
+</div>
         <div class="price-row">
           <div class="price">${fmtRp(p.harga)}</div>
           <button class="add" data-add="${p.id}" data-testid="add-to-cart-${p.id}"><i class="fa-solid fa-cart-plus"></i><span>Tambah</span></button>
@@ -1578,7 +1939,18 @@ html {
         if (!p) return;
         state.modalProduct = p;
         state.modalQty = 1;
-        $("#mImg").src = p.gambar;
+        modalImages =
+  p.gambarList?.length
+    ? p.gambarList
+    : [p.gambar];
+
+currentImageIndex = 0;
+
+$("#mImg").src = modalImages[0];
+
+        const showNav = modalImages.length > 1;
+        $("#prevImg").style.display = showNav ? "block" : "none";
+        $("#nextImg").style.display = showNav ? "block" : "none";
         $("#mImg").alt = p.nama;
         $("#mTag").textContent = p.kategori;
         $("#mName").textContent = p.nama;
@@ -1757,6 +2129,10 @@ html {
         }
 
         const btn = $("#coPay");
+        if (!agree.checked) {
+  alert("Silakan centang persetujuan terlebih dahulu.");
+  return;
+}
         const origHtml = btn.innerHTML;
         btn.disabled = true;
         btn.innerHTML = `<span class="spin"></span> Memproses…`;
@@ -1771,18 +2147,17 @@ html {
             harga: i.harga,
             quantity: i.quantity,
           })),
-          
           total: cartTotal(),
           status: "pending",
           timestamp: new Date().toISOString(),
         };
-        
-        localStorage.setItem(
-  "pending_order",
-  JSON.stringify(order)
-);
+
         // 1) Save to Firestore (or local fallback when placeholder)
-        
+        try {
+          await saveOrderToFirestore(order);
+        } catch (e) {
+          console.warn("Firestore save failed:", e);
+        }
 
         // 2) Request snapToken from backend
         let snapToken = null,
@@ -2078,6 +2453,120 @@ searchInput.addEventListener("input", () => {
 
   }, 300);
 });
-    </script>
+$("#prevImg").onclick = () => {
+
+  currentImageIndex--;
+
+  if(currentImageIndex < 0){
+    currentImageIndex = modalImages.length - 1;
+  }
+
+  $("#mImg").src =
+    modalImages[currentImageIndex];
+
+};
+
+$("#nextImg").onclick = () => {
+
+  currentImageIndex++;
+
+  if(currentImageIndex >= modalImages.length){
+    currentImageIndex = 0;
+  }
+
+  $("#mImg").src =
+    modalImages[currentImageIndex];
+
+};
+const counters = document.querySelectorAll(".counter");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    const el = entry.target;
+    const target = Number(el.dataset.target);
+
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current += Math.ceil(target / 60);
+
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+
+      el.textContent = current.toLocaleString("id-ID") + "+";
+    }, 20);
+
+    observer.unobserve(el);
+  });
+});
+
+counters.forEach(counter => observer.observe(counter));
+document.getElementById("agreeTerms").checked = false;
+document.getElementById("coPay").disabled = true;
+const agree = document.getElementById("agreeTerms");
+const payBtn = document.getElementById("coPay");
+
+agree.addEventListener("change", () => {
+  payBtn.disabled = !agree.checked;
+});
+const modal = document.getElementById("legalModal");
+const title = document.getElementById("legalTitle");
+const content = document.getElementById("legalContent");
+
+function openLegal(judul, isi){
+  title.textContent = judul;
+  content.innerHTML = isi;
+  modal.classList.add("show");
+}
+
+document.getElementById("legalClose").onclick = () =>{
+  modal.classList.remove("show");
+};
+
+
+
+document.getElementById("privacyBtn").onclick = () =>{
+  openLegal(
+    "Kebijakan Privasi",
+    `
+    <p>Kami menjaga kerahasiaan data pelanggan dan hanya menggunakan informasi yang diberikan untuk keperluan pemrosesan pesanan, komunikasi, dan peningkatan layanan.</p>
+
+    <p>Data tidak diperjualbelikan kepada pihak lain tanpa izin pengguna, kecuali diwajibkan oleh peraturan yang berlaku.</p>
+    `
+  );
+};
+
+document.getElementById("termsBtn").onclick = () =>{
+  openLegal(
+    "Syarat & Ketentuan",
+    `
+    <ul>
+      <li>Harga dan stok dapat berubah sewaktu-waktu.</li>
+      <li>Pelanggan wajib memberikan data yang benar saat melakukan pemesanan.</li>
+      <li>Pembayaran diproses melalui penyedia layanan pembayaran yang digunakan oleh WiraStore.</li>
+      <li>Dengan bertransaksi, pelanggan dianggap menyetujui syarat dan ketentuan yang berlaku.</li>
+    </ul>
+    `
+  );
+};
+
+document.getElementById("faqBtn").onclick = () =>{
+  openLegal(
+    "FAQ",
+    `
+    <p><strong>Apakah produk bergaransi?</strong><br>Ya, produk tertentu memiliki garansi sesuai ketentuan masing-masing.</p>
+
+    <p><strong>Bagaimana cara menghubungi WiraStore?</strong><br>Silakan melalui WhatsApp atau email yang tersedia pada website.</p>
+
+    <p><strong>Metode pembayaran apa yang tersedia?</strong><br>Pembayaran dilakukan melalui sistem pembayaran yang tersedia saat checkout.</p>
+    `
+  );
+};
+
+  </script>
   </body>
 </html>
