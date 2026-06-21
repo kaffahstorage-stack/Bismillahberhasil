@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 });
 
 const corsOptions = {
-  origin: "https://www.wirastore.web.id/",
+  origin: "https://www.wirastore.web.id",
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
