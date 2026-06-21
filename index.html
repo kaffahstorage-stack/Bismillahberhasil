@@ -18,7 +18,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
-
+<!-- Favicon -->
+<link rel="icon" href="./assets/logo.png" type="image/png">
+<link rel="shortcut icon" href="/assets/logo.png">
+<link rel="apple-touch-icon" href="/assets/logo.png">
     <!-- Midtrans Snap (sandbox). Client-key bisa di-override otomatis via /api/config -->
     <script
       id="midtrans-snap"
@@ -598,55 +601,88 @@ html {
 
 .footer {
   margin-top: 80px;
-  padding: 60px 0 20px;
-  background: linear-gradient(180deg, #0f172a, #0b1220);
+  padding: 70px 0 25px;
+
+  /* ===== GLASS PREMIUM LIGHT-THEME FRIENDLY ===== */
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.88),
+    rgba(11, 18, 32, 0.95)
+  );
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   color: #cbd5e1;
-  border-top: 1px solid rgba(255,255,255,0.08);
+
+  position: relative;
+  overflow: hidden;
+
+  /* biar nggak “flat gelap” */
+  box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.25);
 }
 
+/* ===== soft ambient glow biar hidup ===== */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  left: -100px;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 122, 24, 0.22),
+    transparent 65%
+  );
+  filter: blur(40px);
+  opacity: 0.8;
+}
+
+.footer::after {
+  content: "";
+  position: absolute;
+  bottom: -140px;
+  right: -120px;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(
+    circle,
+    rgba(34, 197, 94, 0.18),
+    transparent 65%
+  );
+  filter: blur(50px);
+  opacity: 0.7;
+}
+
+/* ===== GRID lebih airy ===== */
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 30px;
+  gap: 36px;
+  position: relative;
+  z-index: 2;
 }
 
-.footer-brand p {
-  margin-top: 12px;
-  color: #94a3b8;
-  line-height: 1.6;
-  font-size: 14px;
-}
-
-.footer .brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
+/* ===== brand section lebih “pop” ===== */
 .footer .mark {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #6366f1, #22c55e);
-  color: white;
+
+  background: linear-gradient(135deg, #ff7a18, #22c55e);
+  box-shadow: 0 10px 25px rgba(255, 122, 24, 0.25);
 }
 
-.footer .name {
-  font-weight: 800;
-  font-size: 18px;
-  color: white;
-}
-
-.footer .name span {
-  color: #22c55e;
-}
-
+/* ===== typography lebih clean ===== */
 .footer-col h4 {
-  color: white;
+  color: #ffffff;
   margin-bottom: 14px;
   font-size: 15px;
+  letter-spacing: 0.3px;
 }
 
 .footer-col a {
@@ -655,18 +691,47 @@ html {
   text-decoration: none;
   margin-bottom: 8px;
   font-size: 14px;
-  transition: 0.2s;
+  transition: 0.2s ease;
 }
 
 .footer-col a:hover {
-  color: white;
-  transform: translateX(4px);
+  color: #ffffff;
+  transform: translateX(6px);
 }
 
-.footer-col p {
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: #94a3b8;
+/* ===== social lebih modern ===== */
+.socials a {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition: 0.25s ease;
+}
+
+.socials a:hover {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.4);
+  transform: translateY(-3px);
+}
+
+/* ===== bottom bar lebih “premium” ===== */
+.footer-bottom {
+  margin-top: 45px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #64748b;
+
+  position: relative;
+  z-index: 2;
 }
 
 .socials {
@@ -1012,6 +1077,18 @@ html {
   font-size:22px;
   cursor:pointer;
 }
+.mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
     </style>
   </head>
   <div class="legal-modal" id="legalModal">
@@ -1025,32 +1102,16 @@ html {
 </div>
   <body>
     
-    <!-- Top bar -->
-    <div class="topbar">
-      <div class="container">
-        <div class="left">
-          <span
-            ><i class="fa-solid fa-truck-fast"></i>Gratis ongkir
-            Jabodetabek</span
-          >
-          <span class="hide-sm" style="margin-left: 18px"
-            ><i class="fa-solid fa-shield-halved"></i>Garansi resmi</span
-          >
-        </div>
-        <div class="right">
-          <span><i class="fa-brands fa-whatsapp"></i>0823-3735-4131</span>
-          <span><i class="fa-regular fa-clock"></i>Sen–Sab · 09.00–17.00</span>
-        </div>
-      </div>
-    </div>
 
     <!-- Header -->
     <header class="site">
       <div class="container nav">
-        <a class="brand" href="#" data-testid="brand-logo">
-          <div class="mark"><i class="fa-solid fa-bolt"></i></div>
-          <div class="name">Wira<span>Store</span></div>
-        </a>
+<a class="brand" href="#" data-testid="brand-logo">
+  <div class="mark">
+    <img src="./assets/logo.png" alt="WiraStore Logo">
+  </div>
+  <div class="name">Wira<span>Store</span></div>
+</a>
         <div class="search">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input
@@ -1203,64 +1264,54 @@ html {
     <!-- Brand -->
     <div class="footer-brand">
       <div class="brand">
-        <div class="mark"><i class="fa-solid fa-bolt"></i></div>
+        <div class="mark">
+          <img src="./assets/logo.png" alt="WiraStore Logo">
+        </div>
         <div class="name">Wira<span>Store</span></div>
       </div>
+
       <p>
         Marketplace elektronik & jasa terpercaya di Indonesia.
         Harga murah, pengiriman cepat, dan pembayaran aman.
       </p>
 
       <div class="socials">
-        <a href="https://www.instagram.com/wira.audio/" target="_blank">
-  <i class="fa-brands fa-instagram"></i>
-</a>
-        <a href="https://www.facebook.com/muchtar.azthar/" target="_blank">
-  <i class="fa-brands fa-facebook"></i>
-</a>
-        <a href="https://wa.me/6282337354131" target="_blank">
-  <i class="fa-brands fa-whatsapp"></i>
-</a>
-<a href="https://wira.audiomasjidindonesia.web.id/" target="_blank">
-  <i class="fa-solid fa-globe"></i>
-</a>
+        <a href="https://www.instagram.com/wira.audio/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/muchtar.azthar/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://wa.me/6282337354131" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://wira.audiomasjidindonesia.web.id/" target="_blank"><i class="fa-solid fa-globe"></i></a>
       </div>
     </div>
-
-
 
     
 
     <!-- Contact -->
     <div class="footer-col">
-      <h4>Kontak</h4>
-      <p><i class="fa-solid fa-location-dot"></i> Indonesia</p>
+      <h4>Kontak Kami</h4>
+
+      <p><i class="fa-solid fa-location-dot"></i> Banjarbaru, Kalimantan Selatan</p>
+      <p><i class="fa-solid fa-clock"></i> Senin – Sabtu, 09.00 – 18.00 WITA</p>
       <p><i class="fa-solid fa-envelope"></i> wiranet.bjb@gmail.com</p>
-      <p><i class="fa-solid fa-phone"></i> +62 823 3735 4131</p>
+      <p><i class="fa-brands fa-whatsapp"></i> +62 823-3735-4131</p>
+    </div>
+
+    <!-- Support -->
+    <div class="footer-col">
+      <h4>Bantuan</h4>
+      <a href="javascript:void(0)" id="privacyBtn">Kebijakan Privasi</a>
+      <a href="javascript:void(0)" id="termsBtn">Syarat & Ketentuan</a>
+      <a href="javascript:void(0)" id="faqBtn">FAQ</a>
+      <a href="mailto:wiranet.bjb@gmail.com">Hubungi Admin</a>
     </div>
 
   </div>
 
+  <!-- Bottom -->
   <div class="footer-bottom">
     <div>© 2026 WiraStore. All rights reserved.</div>
     <div class="mini">
-      Dibuat dengan <span>❤</span>Banjarbaru
+      Dibuat dengan <span>❤</span> di Banjarbaru
     </div>
-  </div>
-
-  <div class="footer-links">
-  <a href="https://wira.audiomasjidindonesia.web.id/" target="_blank">
-  Tentang Kami
-</a>
-  <span>|</span>
-
-<a href="javascript:void(0)" id="privacyBtn">Kebijakan Privasi</a>
-<span>|</span>
-
-<a href="javascript:void(0)" id="termsBtn">Syarat & Ketentuan</a>
-<span>|</span>
-
-<a href="javascript:void(0)" id="faqBtn">FAQ</a>
   </div>
 </footer>
     <!-- Overlay -->
