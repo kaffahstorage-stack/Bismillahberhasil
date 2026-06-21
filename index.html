@@ -2164,7 +2164,7 @@ $("#mImg").src = modalImages[0];
           mock = false;
         try {
           const resp = await fetch(
-            "https://bismillahberhasil-production.up.railway.app/api/create-transaction",
+            "https://www.wirastore.web.id//api/create-transaction",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -2368,7 +2368,7 @@ $("#mImg").src = modalImages[0];
         // Try to update Midtrans client key from backend config if real key set
         try {
           const r = await fetch(
-            "https://bismillahberhasil-production.up.railway.app/api/config",
+            "https://wirastore.web.id/api/config",
           );
           if (r.ok) {
             const cfg = await r.json();
