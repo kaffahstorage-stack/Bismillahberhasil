@@ -7,7 +7,7 @@
     <title>WiraStore Marketplace — Elektronik & Jasa Terpercaya</title>
     <meta
       name="description"
-      content="WiraStore Marketplace — PC Desktop, Laptop, Printer, CCTV, Sound System, dan Jasa Profesional."
+      content="WiraStore Marketplace — Laptop, Printer, CCTV, Sound System, dan Jasa Profesional."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,7 +25,7 @@
 <link rel="apple-touch-icon" href="/assets/logo.png">
     <meta name="robots" content="index, follow">
 <meta name="author" content="WiraStore">
-<meta name="keywords" content="WiraStore, toko elektronik, PC Desktop, Laptop, Printer, CCTV, Sound System, jasa instalasi CCTV, service laptop, marketplace Indonesia">
+<meta name="keywords" content="WiraStore, toko elektronik, Laptop, Printer, CCTV, Sound System, jasa instalasi CCTV, service laptop, marketplace Indonesia">
 <meta name="theme-color" content="#ffffff">
 <meta name="language" content="id">
     <link rel="canonical" href="https://www.wirastore.web.id/">
@@ -48,7 +48,7 @@
   "url": "https://www.wirastore.web.id/",
   "logo": "https://www.wirastore.web.id/assets/logo.png",
   "image": "https://www.wirastore.web.id/assets/logo.png",
-  "description": "Marketplace elektronik yang menyediakan PC Desktop, Laptop, Printer, CCTV, Sound System, dan berbagai jasa profesional.",
+  "description": "Marketplace elektronik yang menyediakan Laptop, Printer, CCTV, Sound System, dan berbagai jasa profesional.",
   "priceRange": "$$",
   "currenciesAccepted": "IDR"
 }
@@ -1120,6 +1120,55 @@ html {
   height: 100%;
   object-fit: contain;
 }
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card .body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card .price-row {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 10px;
+  width: fit-content;
+}
+
+.stock.available {
+  background: rgba(34, 197, 94, 0.12);
+  color: #16a34a;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.stock.empty {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.stock i {
+  font-size: 12px;
+}
+
+.stock strong {
+  font-weight: 700;
+}
     </style>
   </head>
   <div class="legal-modal" id="legalModal">
@@ -1622,53 +1671,6 @@ let currentImageIndex = 0;
 
       /* ---------- Product Data ---------- */
       const PRODUCTS = [
-        // PC Desktop
-       {
-  id: "pc-01",
-  kategori: "PC Desktop",
-  nama: "WiraRig Ryzen 7 RTX 4060",
-  harga: 18990000,
-  stok: 5,
-
-  gambar: "images/products/pc-01.png",
-
-  gambarList: [
-    "images/products/pc-01.png",
-    "images/products/pc-01-2.png",
-    "images/products/pc-01-3.png"
-  ],
-
-  deskripsi:
-    "PC rakitan high-performance dengan Ryzen 7, RTX 4060, RAM 32GB DDR5, SSD NVMe 1TB. Cocok untuk gaming dan kreator.",
-        },
-        {
-          id: "pc-02",
-          kategori: "PC Desktop",
-          nama: "OfficePro i5 SSD 512GB",
-          harga: 7990000,
-          stok: 10,
-          gambar: "images/products/pc-02.png",
-          gambarList: [
-            "images/products/pc-02.png",
-            "images/products/pc-02-2.png"
-          ],
-          deskripsi:
-            "PC kantor Intel Core i5, RAM 16GB, SSD 512GB. Ringkas, hemat daya, dan tahan banting.",
-        },
-        {
-          id: "pc-03",
-          kategori: "PC Desktop",
-          nama: "Creator Studio i7 + RTX 4070",
-          harga: 24990000,
-          stok: 3,
-          gambar: "images/products/pc-03.png",
-          gambarList: [
-            "images/products/pc-03.png",
-            "images/products/pc-03-2.png"
-          ],
-          deskripsi:
-            "Workstation kreator i7-14700, RTX 4070, RAM 64GB, SSD 2TB — render 3D dan video editing lancar.",
-        },
 
         // Laptop
         {
@@ -1677,38 +1679,25 @@ let currentImageIndex = 0;
           nama: 'Asus Vivobook 14',
           harga: 9000000,
           stok: 7,
-          gambar: "images/products/lp-01.png",
+          gambar: "images/products/vivobook1.png",
           gambarList: [
-            "images/products/lp-01.png",
-            "images/products/lp-01-2.png"
+            "images/products/vivobook.png",
+            
           ],
           deskripsi:
             'Laptop tipis 1.2kg, Ryzen 5, RAM 16GB, SSD 512GB, layar IPS 14" — ideal untuk produktivitas harian.',
         },
-        {
-          id: "lp-02",
-          kategori: "Laptop",
-          nama: 'WiraBook Pro 16" i9 RTX',
-          harga: 29990000,
-          stok: 4,
-          gambar: "images/products/lp-02.png",
-          gambarList: [
-            "images/products/lp-02.png",
-            "images/products/lp-02-2.png"
-          ],
-          deskripsi:
-            'Laptop kreator 16" 165Hz, Intel i9, RTX 4070, RAM 32GB, SSD 1TB. Performa workstation di tas Anda.',
-        },
+
         {
           id: "lp-03",
           kategori: "Laptop",
-          nama: 'WiraBook Edu 13" Celeron',
+          nama: 'Advan T-Book 3 Intel N100 8GB/384GB 14″ W11 - ELS.ID',
           harga: 4490000,
           stok: 15,
-          gambar: "images/products/lp-03.png",
+          gambar: "images/products/advan1.png",
           gambarList: [
-            "images/products/lp-03.png",
-            "images/products/lp-03-2.png"
+            "images/products/advan2.png",
+            
           ],
           deskripsi:
             "Laptop pelajar ringan, baterai 10 jam, ideal untuk belajar online dan tugas.",
@@ -1718,187 +1707,125 @@ let currentImageIndex = 0;
         {
           id: "pr-01",
           kategori: "Printer",
-          nama: "InkTank Pro X-720 Wi‑Fi",
-          harga: 2790000,
+          nama: "Printer Epson L3250",
+          harga: 2799000,
           stok: 8,
-          gambar: "images/products/pr-01.png",
+          gambar: "images/products/epson l3210.png",
           gambarList: [
-            "images/products/pr-01.png",
-            "images/products/pr-01-2.png"
+            "images/products/epson l3210.png",
+            
           ],
           deskripsi:
-            "Printer ink-tank irit tinta, Wi‑Fi & cetak dari smartphone. Cocok rumah dan kantor kecil.",
+            "Printer Epson L3250 irit tinta. Cocok rumah dan kantor kecil.",
         },
         {
           id: "pr-02",
           kategori: "Printer",
-          nama: "LaserJet M-201 Mono",
-          harga: 3590000,
+          nama: "Printer Inkjet Cartridge - PIXMA E410",
+          harga: 1150000,
           stok: 6,
-          gambar: "images/products/pr-02.png",
+          gambar: "images/products/canon.png",
           gambarList: [
-            "images/products/pr-02.png",
-            "images/products/pr-02-2.png"
+            "images/products/canon.png",
+            
           ],
           deskripsi:
-            "Printer laser monokrom cepat 30 ppm. Dokumen kantor tajam dan tahan lama.",
+            "Printer inkjet cartridge - PIXMA E410. Cocok untuk penggunaan rumah dan kantor.",
         },
-        {
-          id: "pr-03",
-          kategori: "Printer",
-          nama: "Photo Studio 6-Color A3+",
-          harga: 8990000,
-          stok: 2,
-          gambar: "images/products/pr-03.png",
-          gambarList: [
-            "images/products/pr-03.png",
-            "images/products/pr-03-2.png"
-          ],
-          deskripsi:
-            "Printer foto 6 warna ukuran A3+ untuk fotografer dan studio cetak.",
-        },
+        
 
         // CCTV
         {
           id: "cc-01",
           kategori: "CCTV",
-          nama: "WiraCam 4-Channel 2MP Kit",
-          harga: 2590000,
-          stok: 5,
-          gambar: "images/products/cc-01.png",
+          nama: "Home Smart",
+          harga: 650000,
+          stok: 1,
+          gambar: "images/products/CCTV.png",
           gambarList: [
-            "images/products/cc-01.png",
-            "images/products/cc-01-2.png"
+            "images/products/CCTV.png",
+            "images/products/cctv2.png"
           ],
           deskripsi:
-            "Paket CCTV 4 kamera 2MP, DVR + HDD 1TB, pemantauan via smartphone.",
-        },
-        {
-          id: "cc-02",
-          kategori: "CCTV",
-          nama: "WiraCam Pro 8CH 4MP IP",
-          harga: 5490000,
-          stok: 3,
-          gambar: "images/products/cc-02.png",
-          gambarList: [
-            "images/products/cc-02.png",
-            "images/products/cc-02-2.png"
-          ],
-          deskripsi:
-            "Paket 8 kamera IP 4MP dengan NVR, audio dua arah, dan night vision.",
-        },
-        {
-          id: "cc-03",
-          kategori: "CCTV",
-          nama: "WiraCam Mini Indoor 360°",
-          harga: 649000,
-          stok: 12,
-          gambar: "images/products/cc-03.png",
-          gambarList: [
-            "images/products/cc-03.png",
-            "images/products/cc-03-2.png"
-          ],
-          deskripsi:
-            "Kamera mungil 360° Wi‑Fi untuk indoor, deteksi gerakan & suara.",
+            "Paket CCTV 2 kamera , pemantauan via smartphone.",
         },
 
-        // Sound System
+
+        // Speaker
         {
           id: "ss-01",
-          kategori: "Sound System",
-          nama: "WiraSound Pro 600W PA",
-          harga: 5490000,
-          stok: 5,
-          gambar: "images/products/ss-01.png",
+          kategori: "Speaker",
+          nama: "Speaker Portable",
+          harga: 40000,
+          stok: 10,
+          gambar: "images/products/speaker.png",
           gambarList: [
-            "images/products/ss-01.png",
-            "images/products/ss-01-2.png"
+            "images/products/speaker.png",
+            "images/products/speaker2.png"
           ],
           deskripsi:
             "Speaker PA aktif 600W, Bluetooth, USB, ideal acara hingga 200 orang.",
+            
         },
-        {
-          id: "ss-02",
-          kategori: "Sound System",
-          nama: 'Studio Monitor 5" Pair',
-          harga: 3290000,
-          stok: 8,
-          gambar: "images/products/ss-02.png",
-          gambarList: [
-            "images/products/ss-02.png",
-            "images/products/ss-02-2.png"
-          ],
-          deskripsi:
-            'Sepasang monitor studio 5" — referensi jujur untuk produksi musik.',
-        },
-        {
-          id: "ss-03",
-          kategori: "Sound System",
-          nama: "Karaoke Set 200W + 2 Mic",
-          harga: 1990000,
-          stok: 10,
-          gambar: "images/products/ss-03.png",
-          gambarList: [
-            "images/products/ss-03.png",
-            "images/products/ss-03-2.png"
-          ],
-          deskripsi:
-            "Paket karaoke rumah dengan amplifier 200W dan 2 mic wireless.",
-        },
+
 
         // Jasa
         {
           id: "js-01",
           kategori: "Jasa",
-          nama: "Jasa Instalasi CCTV (per titik)",
-          harga: 250000,
-          stok: 5,
-          gambar: "images/products/js-01.png",
-          gambarList: [
-            "images/products/js-01.png",
-            "images/products/js-01-2.png"
-          ],
-          deskripsi:
-            "Pemasangan, konfigurasi, dan rapikan kabel CCTV. Tim teknisi bersertifikat.",
-        },
-        {
-          id: "js-02",
-          kategori: "Jasa",
-          nama: "Service Laptop / PC",
+          nama: "Jasa Install ulang windows",
           harga: 150000,
-          stok: 10,
-          gambar: "images/products/js-02.png",
+          stok: 999,
+          gambar: "images/products/jasa.png",
           gambarList: [
-            "images/products/js-02.png",
-            "images/products/js-02-2.png"
+            "images/products/jasa.png",
+            
           ],
           deskripsi:
-            "Diagnosa, install ulang, upgrade SSD/RAM. Hasil terjamin & cepat.",
+            "jasa install ulang windows untuk perangkat laptop dan PC.",
         },
+
+         // Storage
         {
-          id: "js-03",
-          kategori: "Jasa",
-          nama: "Setup Sound System Event",
+          id: "st-01",
+          kategori: "Storage",
+          nama: "SSD 256 gb",
           harga: 1500000,
-          stok: 5,
-          gambar: "images/products/js-03.png",
+          stok: 7,
+          gambar: "images/products/storage.png",
           gambarList: [
-            "images/products/js-03.png",
-            "images/products/js-03-2.png"
+            "images/products/storage.png",
+            
           ],
-          deskripsi: "Persiapan dan tuning sound untuk event sampai 300 orang.",
+          deskripsi:
+            "SSD 256 GB, cocok untuk penyimpanan data dan peningkatan performa komputer.",
         },
+        
+                {
+          id: "st-02",
+          kategori: "Storage",
+          nama: "SSD NVME 128 gb",
+          harga: 1500000,
+          stok: 7,
+          gambar: "images/products/nvme.png",
+          gambarList: [
+            "images/products/nvme.png",
+            
+          ],
+          deskripsi:
+            "SSD NVME 128 GB, cocok untuk penyimpanan data dan peningkatan performa komputer.",
+        },
+
       ];
 
       const CATEGORIES = [
-        { key: "All", label: "Semua", icon: "fa-grid-2" },
-        { key: "PC Desktop", label: "PC Desktop", icon: "fa-desktop" },
+        { key: "All", label: "Semua", icon: "fa-grid-2" },        
         { key: "Laptop", label: "Laptop", icon: "fa-laptop" },
         { key: "Printer", label: "Printer", icon: "fa-print" },
         { key: "CCTV", label: "CCTV", icon: "fa-video" },
-        { key: "Sound System", label: "Sound System", icon: "fa-volume-high" },
+        { key: "Speaker", label: "Speaker", icon: "fa-volume-high" },
         { key: "Jasa", label: "Jasa", icon: "fa-screwdriver-wrench" },
-        { key: "storage", label: "Storage", icon: "fa-hard-drive" },
+        { key: "Storage", label: "Storage", icon: "fa-hard-drive" },
       ];
 
       /* ---------- State ---------- */
@@ -1997,11 +1924,14 @@ let currentImageIndex = 0;
       <div class="body">
         <div class="name" data-open="${p.id}">${p.nama}</div>
         <div class="desc">${p.deskripsi}</div>
-        <div class="stock">
+<div class="stock ${p.stok > 0 ? "available" : "empty"}">
+  <i class="fa-solid ${
+    p.stok > 0 ? "fa-circle-check" : "fa-circle-xmark"
+  }"></i>
   ${
     p.stok > 0
-      ? `🟢 Stok: ${p.stok}`
-      : `🔴 Stok Habis`
+      ? `<span>Tersedia <strong>${p.stok}</strong> unit</span>`
+      : `<span>Stok Habis</span>`
   }
 </div>
         <div class="price-row">
